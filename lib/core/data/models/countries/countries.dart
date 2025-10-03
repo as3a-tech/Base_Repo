@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:base_project/core/shared_widgets/custom_media/custom_image.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CountryCodeModel extends Equatable {
   String? nameEn;
@@ -34,7 +34,7 @@ class CountryCodeModel extends Equatable {
     shortName = json['shortName'];
     countryCode = json['countryCode'];
     flagSVG =
-        'assets/countries/${json['shortName'].toString().toLowerCase()}.svg';
+        'assets/countries/${json['shortName'].toString().toLowerCase()}.png';
     startDigits = json['startDigits']?.cast<String>();
     numLenFrom = json['numLenFrom'];
     numLenTo = json['numLenTo'];
@@ -44,13 +44,12 @@ class CountryCodeModel extends Equatable {
     width: size,
     height: size,
     child: Center(
-      child: SvgPicture.asset(
-        flagSVG ?? "",
+      child: CustomImage(
+        image: flagSVG ?? "",
         width: size,
         height: size,
         fit: BoxFit.contain,
-        errorBuilder:
-            (context, error, stackTrace) => SizedBox(width: size, height: size),
+        errorWidget: SizedBox(width: size, height: size),
       ),
     ),
   );

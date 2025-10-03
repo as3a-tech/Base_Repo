@@ -3,11 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../core/helpers/data_helper/date_helper.dart';
 import '../../core/data/images/app_images.dart';
+import '../../core/data/models/countries/countries.dart';
+import '../../core/helpers/data_helper/date_helper.dart';
 import '../../core/networking/app_urls.dart';
 import '../../core/shared_widgets/buttons/custom_button.dart';
 import '../../core/shared_widgets/buttons/custom_tab_btns.dart';
+import '../../core/shared_widgets/custom_form/custom_select_field.dart';
+import '../../core/shared_widgets/custom_form/custom_select_item.dart';
 import '../../core/shared_widgets/custom_linear_slider/custom_linear_slider.dart';
 import '../../core/shared_widgets/custom_media/custom_image.dart';
 import '../../core/shared_widgets/custom_slider/custom_slider.dart';
@@ -70,6 +73,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             CustomLinearSlider(value: 50, min: 0, max: 100),
+            CustomSelectField(
+              items:
+                  allCountries
+                      .map(
+                        (e) => CustomSelectItem(
+                          value: e,
+                          name: e.nameAr ?? "",
+                          child: Row(
+                            children: [
+                              e.buildFlagWidget(),
+                              Text(e.nameAr ?? ""),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+            ),
             CustomButton(
               prefixIcon: CustomImage(
                 image: AppImages.tickCircle,
